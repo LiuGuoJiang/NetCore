@@ -1,0 +1,11 @@
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\bin\Debug\netcoreapp2.0\CoreBackend.Api.deps.json
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\bin\Debug\netcoreapp2.0\CoreBackend.Api.runtimeconfig.json
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\bin\Debug\netcoreapp2.0\CoreBackend.Api.runtimeconfig.dev.json
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\bin\Debug\netcoreapp2.0\CoreBackend.Api.dll
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\bin\Debug\netcoreapp2.0\CoreBackend.Api.pdb
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.csprojResolveAssemblyReference.cache
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.csproj.CoreCompileInputs.cache
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.AssemblyInfoInputs.cache
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.AssemblyInfo.cs
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.dll
+c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.pdb
