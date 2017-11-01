@@ -12976,11 +12976,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\liuguojiang\\Documents\\Visual Studio 2017\\Projects\\CoreBackend.Api\\CoreBackend.Api\\CoreBackend.Api.csproj",
+      "projectUniqueName": "D:\\tuhushop\\webApi\\NetCore\\CoreBackend.Api\\CoreBackend.Api\\CoreBackend.Api.csproj",
       "projectName": "CoreBackend.Api",
-      "projectPath": "C:\\Users\\liuguojiang\\Documents\\Visual Studio 2017\\Projects\\CoreBackend.Api\\CoreBackend.Api\\CoreBackend.Api.csproj",
+      "projectPath": "D:\\tuhushop\\webApi\\NetCore\\CoreBackend.Api\\CoreBackend.Api\\CoreBackend.Api.csproj",
       "packagesPath": "C:\\Users\\liuguojiang\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\liuguojiang\\Documents\\Visual Studio 2017\\Projects\\CoreBackend.Api\\CoreBackend.Api\\obj\\",
+      "outputPath": "D:\\tuhushop\\webApi\\NetCore\\CoreBackend.Api\\CoreBackend.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

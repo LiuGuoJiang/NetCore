@@ -15,10 +15,12 @@ namespace CoreBackend.Api.Controllers
                                //也可以具体指定, [Route("api/product")], 这样做的好处是, 如果ProductController重构以后改名了, 只要不改Route里面的内容, 那么请求的地址不会发生变化.
     public class ProductController:Controller
     {
-        private ILogger<ProductController> _logger;//interface不是具体的实现类
-        ProductController(ILogger<ProductController> logger)
+        private readonly ILogger<ProductController> _logger;//interface不是具体的实现类
+        private readonly IMailService _mailService;
+        public ProductController(ILogger<ProductController> logger,IMailService mailService)
         {
             _logger = logger;
+            _mailService = mailService;
         }
         [HttpGet]//然后在GetProducts方法上面, 写上HttpGet, 也可以写HttpGet(). 
                  //它里面还可以加参数,例如: HttpGet("all"), 那么这个Action的请求的地址就变成了 "/api/product/All".
@@ -139,6 +141,7 @@ namespace CoreBackend.Api.Controllers
                 return NotFound();
             }
             ProductService.CurrentProducts.Products.Remove(model);
+            _mailService.Send("Product Deleted", $"Id为{id}的产品被删除");
             return NoContent();
         }
     }

@@ -9,3 +9,13 @@ c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreB
 c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.AssemblyInfo.cs
 c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.dll
 c:\users\liuguojiang\documents\visual studio 2017\Projects\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.pdb
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\bin\Debug\netcoreapp2.0\CoreBackend.Api.deps.json
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\bin\Debug\netcoreapp2.0\CoreBackend.Api.runtimeconfig.json
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\bin\Debug\netcoreapp2.0\CoreBackend.Api.runtimeconfig.dev.json
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\bin\Debug\netcoreapp2.0\CoreBackend.Api.dll
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\bin\Debug\netcoreapp2.0\CoreBackend.Api.pdb
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.csproj.CoreCompileInputs.cache
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.AssemblyInfoInputs.cache
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.AssemblyInfo.cs
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.dll
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.pdb
