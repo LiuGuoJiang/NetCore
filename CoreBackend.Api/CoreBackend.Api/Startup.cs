@@ -12,6 +12,7 @@ using CoreBackend.Api.Service;
 using Microsoft.Extensions.Configuration;
 using CoreBackend.Api.Entities;
 using Microsoft.EntityFrameworkCore;
+using CoreBackend.Api.Repositories;
 
 namespace CoreBackend.Api
 {
@@ -37,6 +38,7 @@ namespace CoreBackend.Api
 #endif
             var connectionString = Configuration["connectionStrings:productionInfoDbConnectionString"];
             services.AddDbContext<MyContext>(o => o.UseSqlServer(connectionString));
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
