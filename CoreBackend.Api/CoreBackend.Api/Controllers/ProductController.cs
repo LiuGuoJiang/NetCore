@@ -7,6 +7,8 @@ using CoreBackend.Api.Dtos;
 using CoreBackend.Api.Service;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Extensions.Logging;
+using CoreBackend.Api.Repositories;
+using AutoMapper;
 
 namespace CoreBackend.Api.Controllers
 {
@@ -17,62 +19,55 @@ namespace CoreBackend.Api.Controllers
     {
         private readonly ILogger<ProductController> _logger;//interface不是具体的实现类
         private readonly IMailService _mailService;
-        public ProductController(ILogger<ProductController> logger,IMailService mailService)
+        private readonly IProductRepository _productRepository;
+        public ProductController(ILogger<ProductController> logger,IMailService mailService, IProductRepository productRepository)
         {
             _logger = logger;
             _mailService = mailService;
+            _productRepository = productRepository;
         }
         [HttpGet]//然后在GetProducts方法上面, 写上HttpGet, 也可以写HttpGet(). 
                  //它里面还可以加参数,例如: HttpGet("all"), 那么这个Action的请求的地址就变成了 "/api/product/All".
         public IActionResult GetProducts()
         {
-            return Ok(ProductService.CurrentProducts.Products);
+            var products = _productRepository.GetProduct();
+            var results = Mapper.Map<IEnumerable<ProductWithoutMaterialDto>>(products);
+            //var results = new List<ProductWithoutMaterialDto>();
+            //foreach(var product in products)
+            //{
+            //    results.Add(new ProductWithoutMaterialDto
+            //    {
+            //        Id=product.Id,
+            //        Name=product.Name,
+            //        Price=product.Price,
+            //        Description=product.Description
+            //    });
+            //}
+            return Ok(results);
         }
         [Route("{id}",Name ="GetProduct")]
-        public IActionResult GetProducts(int id)
+        public IActionResult GetProducts(int id,bool includeMaterial=false)
         {
+            Product products = new Product();
             try
             {
-                var products = ProductService.CurrentProducts.Products.SingleOrDefault(x => x.Id == id);
-                if (products == null)
-                {
-                    _logger.LogInformation($"Id为{id}的产品没有被找到");
-                    return NotFound();
-                }
-                else
-                {
-                    return Ok(products);
-                }
+                products = _productRepository.GetProduct(id,includeMaterial);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogCritical($"查找Id为{id}的产品时出现了错误！", ex);
                 return StatusCode(500, "处理请求的时候发生了错误！");
             }
+            if (includeMaterial)
+            {
+                var productWithMaterialResult = Mapper.Map<ProductDto>(products);
+                return Ok(productWithMaterialResult);
+            }
+            var onlyProductResult = Mapper.Map<ProductWithoutMaterialDto>(products);
+            return Ok(onlyProductResult);
         }
         [HttpPost("CreateProduct")]
         public IActionResult Post([FromBody] ProductCreation product)
-        {
-            if (product == null)
-            {
-                return BadRequest();
-            }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var maxId = ProductService.CurrentProducts.Products.Max(x => x.Id);
-            var newProduct = new Product
-            {
-                Id = ++maxId,
-                Name = product.Name,
-                Price = product.Price
-            };
-            ProductService.CurrentProducts.Products.Add(newProduct);
-            return CreatedAtRoute("GetProduct", new { id = newProduct.Id },newProduct);
-        }
-        [HttpPut("{id}")]
-        public IActionResult Put(int id,[FromBody] ProductModification product)
         {
             if (product == null)
             {
@@ -84,15 +79,52 @@ namespace CoreBackend.Api.Controllers
             }
             if (!ModelState.IsValid)
             {
+                return BadRequest(ModelState);
+            }
+            var newProduct = Mapper.Map<Product>(product);
+            _productRepository.AddProduct(newProduct);
+            if (!_productRepository.Save())
+            {
+                return StatusCode(500, "保存产品的时候出错");
+            }
+            var dto = Mapper.Map<ProductWithoutMaterialDto>(newProduct);
+            //var maxId = ProductService.CurrentProducts.Products.Max(x => x.Id);
+            //var newProduct = new Product
+            //{
+            //    Id = ++maxId,
+            //    Name = product.Name,
+            //    Price = product.Price
+            //};
+            //ProductService.CurrentProducts.Products.Add(newProduct);
+            return CreatedAtRoute("GetProduct", new { id = dto.Id }, dto);
+        }
+        [HttpPut("{id}")]
+        public IActionResult Put(int id,[FromBody] ProductModification productModification)
+        {
+            if (productModification == null)
+            {
                 return BadRequest();
             }
-            var model = ProductService.CurrentProducts.Products.SingleOrDefault(x => x.Id == id);
-            if (model == null)
+
+            if (productModification.Name == "产品")
+            {
+                ModelState.AddModelError("Name", "产品的名称不可以是'产品'二字");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var product = _productRepository.GetProduct(id);
+            if (product == null)
             {
                 return NotFound();
             }
-            model.Name = product.Name;
-            model.Price = product.Price;
+            Mapper.Map(productModification, product);
+            if (!_productRepository.Save())
+            {
+                return StatusCode(500, "保存产品的时候出错");
+            }
             return NoContent();
         }
         [HttpPatch("{id}")]
@@ -102,17 +134,12 @@ namespace CoreBackend.Api.Controllers
             {
                 return BadRequest();
             }
-            var model = ProductService.CurrentProducts.Products.SingleOrDefault(x => x.Id == id);
-            if (model == null)
+            var productEntity = _productRepository.GetProduct(id);
+            if (productEntity == null)
             {
                 return NotFound();
             }
-            var toPatch = new ProductModification
-            {
-                Name = model.Name,
-                Description = model.Description,
-                Price = model.Price
-            };
+            var toPatch = Mapper.Map<ProductModification>(productEntity);
             patchDoc.ApplyTo(toPatch, ModelState);
             if (!ModelState.IsValid)
             {
@@ -127,20 +154,26 @@ namespace CoreBackend.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            model.Name = toPatch.Name;
-            model.Description = toPatch.Description;
-            model.Price = toPatch.Price;
+            Mapper.Map(toPatch, productEntity);
+            if (!_productRepository.Save())
+            {
+                return StatusCode(500, "更新的时候出错");
+            }
             return NoContent();
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var model = ProductService.CurrentProducts.Products.SingleOrDefault(x => x.Id == id);
+            var model = _productRepository.GetProduct(id);
             if (model == null)
             {
                 return NotFound();
             }
-            ProductService.CurrentProducts.Products.Remove(model);
+            _productRepository.DeleteProduct(model);
+            if (!_productRepository.Save())
+            {
+                return StatusCode(500, "删除数据出错");
+            }
             _mailService.Send("Product Deleted", $"Id为{id}的产品被删除");
             return NoContent();
         }

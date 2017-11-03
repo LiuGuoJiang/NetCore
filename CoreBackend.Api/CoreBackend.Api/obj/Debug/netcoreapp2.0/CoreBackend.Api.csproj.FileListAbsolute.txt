@@ -19,3 +19,4 @@ D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2
 D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.AssemblyInfo.cs
 D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.dll
 D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.pdb
+D:\tuhushop\webApi\NetCore\CoreBackend.Api\CoreBackend.Api\obj\Debug\netcoreapp2.0\CoreBackend.Api.csprojResolveAssemblyReference.cache

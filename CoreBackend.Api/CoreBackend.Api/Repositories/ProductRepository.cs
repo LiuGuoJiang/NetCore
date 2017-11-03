@@ -19,7 +19,7 @@ namespace CoreBackend.Api.Repositories
         {
             return _myContext.Products.OrderBy(x => x.Name).ToList();
         }
-        public Product GetProduct(int productId,bool includeMaterials)
+        public Product GetProduct(int productId,bool includeMaterials=false)
         {
             if (includeMaterials)
             {
@@ -35,6 +35,22 @@ namespace CoreBackend.Api.Repositories
         public IEnumerable<Material> GetMaterialsForProduct(int productId)
         {
             return _myContext.Materials.Where(x => x.ProductId == productId).ToList();
+        }
+        public bool ProductExists(int productId)
+        {
+            return _myContext.Products.Any(x => x.Id == productId);
+        }
+        public void AddProduct(Product product)
+        {
+            _myContext.Products.Add(product);
+        }
+        public bool Save()
+        {
+            return _myContext.SaveChanges() >= 0;
+        }
+        public void DeleteProduct(Product product)
+        {
+            _myContext.Products.Remove(product);
         }
     }
 }

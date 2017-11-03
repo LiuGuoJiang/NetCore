@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using CoreBackend.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 using CoreBackend.Api.Repositories;
+using CoreBackend.Api.Dtos;
 
 namespace CoreBackend.Api
 {
@@ -55,6 +56,14 @@ namespace CoreBackend.Api
                 app.UseExceptionHandler();
             }
             app.UseStatusCodePages();
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Product, ProductWithoutMaterialDto>();
+                cfg.CreateMap<Product, ProductDto>();
+                cfg.CreateMap<Material, MaterialDto>();
+                cfg.CreateMap<ProductCreation,Product>();
+                cfg.CreateMap<ProductModification, Product>();
+            });
             app.UseMvc();
             //应该在处理异常的middleware后边调用app.UserMvc()，处理异常的middleware可以在把request交给MVC之前就处理异常，更重要的是它还可以捕获并处理返回MVC相关代码执行中的异常。
 

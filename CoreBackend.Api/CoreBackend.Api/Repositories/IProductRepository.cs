@@ -9,8 +9,12 @@ namespace CoreBackend.Api.Repositories
     public interface IProductRepository
     {
         IEnumerable<Product> GetProduct();
-        Product GetProduct(int productId, bool includeMaterials);
+        Product GetProduct(int productId, bool includeMaterials=false);
         IEnumerable<Material> GetMaterialsForProduct(int productId);
         Material GetMaterialForProduct(int productId, int materialId);
+        bool ProductExists(int productId);
+        void AddProduct(Product product);
+        bool Save();
+        void DeleteProduct(Product product);
     }
 }
